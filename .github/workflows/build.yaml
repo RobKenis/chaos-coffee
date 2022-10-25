@@ -18,6 +18,11 @@ jobs:
       - name: Test Coffee Machine
         run: mvn verify
         working-directory: coffee-machine
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: '**/target/*-reports/TEST*.xml'
   native-build:
     runs-on: ubuntu-latest
     needs: [ test ]
