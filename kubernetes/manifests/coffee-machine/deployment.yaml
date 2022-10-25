@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: coffee-machine
 spec:
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: coffee-machine
