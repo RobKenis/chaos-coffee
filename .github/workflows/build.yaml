@@ -15,7 +15,8 @@ jobs:
           version: 'latest'
           java-version: '17'
           components: 'native-image'
-      - name: Native build
+      - name: Build Coffee Machine
         run: mvn package -Pnative
+        working-directory: coffee-machine
 
 
