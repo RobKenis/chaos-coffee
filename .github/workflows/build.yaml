@@ -45,11 +45,17 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v4.1.1
+        with:
+          images: ghcr.io/robkenis/chaos-coffee
       - name: Build Coffee Machine
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ghcr.io/RobKenis/chaos-coffee/coffee-machine:latest
-          dockerfile: ./coffee-machine/Dockerfile
+          file: ./coffee-machine/Dockerfile
           context: ./coffee-machine/
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
