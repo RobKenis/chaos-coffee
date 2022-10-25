@@ -1,0 +1,13 @@
+== Architecture
+
+[plantuml,"sequence-diagram",svg]
+.Sequence diagram
+----
+Alice -> "Coffee Machine": Request coffee
+"Coffee Machine" --> Alice: Send payment request
+
+Alice -> "Payment System": Pay for coffee
+"Payment System" --> "Coffee Machine": Start making coffee
+
+"Coffee Machine" --> Alice: Give coffee
+----
