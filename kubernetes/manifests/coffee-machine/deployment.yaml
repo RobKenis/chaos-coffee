@@ -20,3 +20,11 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: http
+              path: '/q/health/live'
+          readinessProbe:
+            httpGet:
+              port: http
+              path: '/q/health/ready'
