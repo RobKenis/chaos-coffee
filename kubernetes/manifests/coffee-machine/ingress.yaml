@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: coffee-machine
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: coffee-machine.home
+      http:
+        paths:
+          - backend:
+              service:
+                name: coffee-machine
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
