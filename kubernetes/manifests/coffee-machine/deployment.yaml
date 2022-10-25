@@ -17,6 +17,6 @@ spec:
           image: 'ghcr.io/robkenis/chaos-coffee/coffee-machine:latest'
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: http
               protocol: TCP
