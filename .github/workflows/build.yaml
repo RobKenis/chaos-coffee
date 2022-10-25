@@ -26,7 +26,8 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: native-images
-          path: coffee-machine/target/*-runner
+          path: coffee-machine*/target/*-runner
+          if-no-files-found: error
   docker-build:
     runs-on: ubuntu-latest
     needs: [ native-build ]
