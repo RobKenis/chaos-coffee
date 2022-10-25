@@ -69,6 +69,8 @@ jobs:
         uses: docker/metadata-action@v4.1.1
         with:
           images: ghcr.io/robkenis/chaos-coffee/coffee-machine
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
       - name: Build Coffee Machine
         uses: docker/build-push-action@v3
         with:
@@ -97,6 +99,8 @@ jobs:
         uses: docker/metadata-action@v4.1.1
         with:
           images: ghcr.io/robkenis/chaos-coffee/docs
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
       - name: Build Documentation
         uses: docker/build-push-action@v3
         with:
