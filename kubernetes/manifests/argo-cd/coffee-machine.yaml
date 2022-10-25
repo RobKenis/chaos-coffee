@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coffee-machine
+  namespace: argocd
+spec:
+  destination:
+    namespace: chaos-coffee
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: kubernetes/manifests/coffee-machine
+    repoURL: 'git@github.com:RobKenis/chaos-coffee.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

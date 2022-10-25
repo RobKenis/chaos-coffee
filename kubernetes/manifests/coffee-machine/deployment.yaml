@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-machine
+spec:
+  selector:
+    matchLabels:
+      app: coffee-machine
+  template:
+    metadata:
+      labels:
+        app: coffee-machine
+    spec:
+      containers:
+        - name: coffee-machine
+          image: ghcr.io/robkenis/chaos-coffee/docs:main
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
