@@ -44,7 +44,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: native-images
-          path: coffee-machine*/target/*-runner
+          path: coffee-machine/target/*-runner
           if-no-files-found: error
   docker-build:
     runs-on: ubuntu-latest
@@ -54,6 +54,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: native-images
+          path: coffee-machine/target
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
