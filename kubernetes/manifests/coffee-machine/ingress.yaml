@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: coffee-machine.home
+    - host: chaos-coffee.home
       http:
         paths:
           - backend:
