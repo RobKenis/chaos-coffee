@@ -44,10 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ test, ui-build ]
     steps:
-      - name: Update build dependencies
-        run: |
-          sudo apt update -y
-          sudo apt upgrade -y
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
@@ -80,6 +76,10 @@ jobs:
         with:
           name: native-images
           path: coffee-machine/target
+      - uses: actions/download-artifact@v3
+        with:
+          name: ui
+          path: coffee-machine/src/main/resources/META-INF/resources/
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -102,7 +102,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          file: ./coffee-machine/Dockerfile
+          file: ./coffee-machine/multistage.Dockerfile
           context: ./coffee-machine/
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
