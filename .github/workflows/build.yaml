@@ -23,11 +23,32 @@ jobs:
         if: always()
         with:
           junit_files: '**/target/*-reports/TEST*.xml'
-  native-build:
+  ui-build:
     runs-on: ubuntu-latest
-    needs: [ test ]
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+        working-directory: coffee-machine-ui
+      - name: Build Coffee Machine UI
+        run: npm run build
+        working-directory: coffee-machine-ui
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ui
+          path: coffee-machine-ui/build/
+          if-no-files-found: error
+  native-build:
+    runs-on: ubuntu-latest
+    needs: [ test, ui-build ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ui
+          path: coffee-machine/src/main/resources/META-INF/resources/
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
